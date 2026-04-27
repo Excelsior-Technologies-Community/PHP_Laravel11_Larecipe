@@ -94,19 +94,19 @@ return [
     |
     */
 
-    'search'            => [
-        'enabled'       => false,
-        'default'       => 'algolia',
-        'engines'       => [
-            'internal'  => [
-                'index' => ['h2', 'h3']
-            ],
-            'algolia'   => [
-                'key'   => '',
-                'index' => ''
-            ]
+'search' => [
+    'enabled' => true,
+    'default' => 'internal', // ✅ change this
+    'engines' => [
+        'internal' => [
+            'index' => ['h2', 'h3']
+        ],
+        'algolia' => [
+            'key' => '',
+            'index' => ''
         ]
-    ],
+    ]
+],
 
     /*
     |--------------------------------------------------------------------------
