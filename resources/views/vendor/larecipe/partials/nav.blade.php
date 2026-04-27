@@ -67,3 +67,44 @@
         </div>
     </nav>
 </div>
+
+
+<script>
+document.addEventListener("keydown", function (e) {
+
+    if (e.key !== "Enter") return;
+
+    let active = document.activeElement;
+
+    if (!active) return;
+
+    let value = active.value;
+
+    if (!value) return;
+
+    fetch('/docs/search-log', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: JSON.stringify({ query: value })
+    })
+    .then(async res => {
+
+        let data = await res.text(); // IMPORTANT FIX
+
+        console.log("RAW RESPONSE:", data);
+
+        try {
+            let json = JSON.parse(data);
+            console.log("SUCCESS:", json);
+        } catch (err) {
+            console.log("NOT JSON RESPONSE:", data);
+        }
+
+    })
+    .catch(err => console.log("NETWORK ERROR:", err));
+
+});
+</script>
