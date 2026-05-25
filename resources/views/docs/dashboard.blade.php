@@ -2,31 +2,25 @@
 <html>
 <head>
     <title>Documentation Dashboard</title>
-
     <style>
         body { font-family: Arial; padding: 20px; background: #f8f9fa; }
         h2 { margin-bottom: 20px; }
-
         table {
             width: 100%;
             border-collapse: collapse;
             background: white;
             margin-bottom: 30px;
         }
-
         th, td {
             padding: 12px;
             border: 1px solid #ddd;
             text-align: left;
         }
-
         th {
             background: #222;
             color: white;
         }
-
         tr:hover { background: #f1f1f1; }
-
         .card {
             background: white;
             padding: 15px;
@@ -35,7 +29,6 @@
         }
     </style>
 </head>
-
 <body>
 
 <h2>📊 Documentation Analytics Dashboard</h2>
@@ -44,8 +37,7 @@
     <strong>Total Pages Tracked:</strong> {{ $data->count() }}
 </div>
 
-<!-- PAGE ANALYTICS -->
-<h3>📄 Page Views</h3>
+<h3>📄 Page Views & Feedback</h3>
 
 <table>
     <thead>
@@ -53,21 +45,23 @@
             <th>Version</th>
             <th>Page</th>
             <th>Views</th>
+            <th>👍 Likes</th>
+            <th>👎 Dislikes</th>
         </tr>
     </thead>
-
     <tbody>
         @foreach($data as $row)
         <tr>
             <td>{{ $row->version }}</td>
             <td>{{ $row->page }}</td>
             <td>{{ $row->views }}</td>
+            <td>{{ $row->likes ?? 0 }}</td>
+            <td>{{ $row->dislikes ?? 0 }}</td>
         </tr>
         @endforeach
     </tbody>
 </table>
 
-<!-- SEARCH LOG -->
 <h3>🔍 Search History</h3>
 
 <table>
@@ -78,7 +72,6 @@
             <th>Date</th>
         </tr>
     </thead>
-
     <tbody>
         @foreach($searches as $search)
         <tr>
